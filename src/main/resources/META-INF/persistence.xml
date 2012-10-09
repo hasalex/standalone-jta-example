@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+    <persistence-unit name="Example1PU" transaction-type="RESOURCE_LOCAL">
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/example-db1"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="Example2PU" transaction-type="JTA">
+        <jta-data-source>java:/Example2DS</jta-data-source>
+        <properties>
+            <property name="hibernate.jndi.class" value="org.jnp.interfaces.NamingContextFactory"/> 
+            <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup"/> 
+            <property name="current_session_context_class" value="jta"/>
+            <property name="hibernate.transaction.factory_class" value="org.hibernate.transaction.JTATransactionFactory"/>
+                          
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/example-db2"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="helloworld" transaction-type="JTA">
+        <jta-data-source>java:/MyDatasource</jta-data-source>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/> 
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.jndi.class" value="org.jnp.interfaces.NamingContextFactory"/> 
+            <!--<property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />-->
+            <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform" />
+        </properties>
+    </persistence-unit>
+</persistence>
