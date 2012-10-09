@@ -1,0 +1,2 @@
+standalone-jta-example
+======================
